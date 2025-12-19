@@ -305,3 +305,38 @@ public class SnakesLaddersGUI extends JFrame {
         return true;
     }
 }
+
+class RoundedButton extends javax.swing.JButton {
+    public RoundedButton(String t) { super(t); setContentAreaFilled(false); }
+    @Override protected void paintComponent(java.awt.Graphics g) {
+        java.awt.Graphics2D g2 = (java.awt.Graphics2D)g.create();
+        g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setColor(getModel().isArmed()?getBackground().darker():getBackground());
+        g2.fillRoundRect(0,0,getWidth(),getHeight(),30,30);
+        super.paintComponent(g2); g2.dispose();
+    }
+    @Override protected void paintBorder(java.awt.Graphics g) {}
+}
+
+class PlayerCard extends javax.swing.JPanel {
+    public PlayerCard(Player p) {
+        setLayout(new java.awt.BorderLayout()); setOpaque(false);
+        setPreferredSize(new java.awt.Dimension(200, 40)); setMaximumSize(new java.awt.Dimension(200, 40));
+        
+        javax.swing.JPanel icon = new javax.swing.JPanel() {
+            @Override protected void paintComponent(java.awt.Graphics g) {
+                java.awt.Graphics2D g2d = (java.awt.Graphics2D) g;
+                g2d.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+                try { g2d.setColor(p.color); } catch(Exception e) { g2d.setColor(java.awt.Color.BLUE); }
+                g2d.fillOval(5,5,30,30);
+            }
+        };
+        icon.setPreferredSize(new java.awt.Dimension(40,40)); icon.setOpaque(false);
+        
+        javax.swing.JLabel lbl = new javax.swing.JLabel(p.name + " (" + p.score + ")");
+        lbl.setFont(new java.awt.Font("Comic Sans MS", java.awt.Font.PLAIN, 12));
+        lbl.setBorder(new javax.swing.border.EmptyBorder(0,10,0,0));
+        add(icon, java.awt.BorderLayout.WEST); add(lbl, java.awt.BorderLayout.CENTER);
+        setBorder(javax.swing.BorderFactory.createMatteBorder(0,0,1,0, new java.awt.Color(230,230,230)));
+    }
+}

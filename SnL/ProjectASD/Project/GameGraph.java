@@ -6,7 +6,7 @@ public class GameGraph {
     Node[] nodes = new Node[65]; 
 
     public GameGraph(int size) {
-        // [STRUKTUR DATA]: Linked List Dua Arah
+        //Linked List Dua Arah
         // Kita sambungkan node satu per satu (next & prev) 
         // supaya pemain bisa jalan MAJU dan MUNDUR (kalau kena efek mundur).
         for (int i = 1; i <= size; i++) {
